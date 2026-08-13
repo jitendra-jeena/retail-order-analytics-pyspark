@@ -14,3 +14,6 @@ def coalesce_partitions(df: DataFrame, num_partitions: int) -> DataFrame:
 def inspect_partition_sizes(df: DataFrame) -> list[int]:
     """Returns the row count of each partition. Triggers a Spark job (unlike getNumPartitions())."""
     return df.rdd.glom().map(len).collect()
+
+def apply_caching(df: DataFrame) -> DataFrame:
+    return df.cache()

@@ -3,7 +3,7 @@ import argparse
 from src.spark_session import get_spark_session
 from src.ingestion import load_orders, load_customers
 from src.transformations import join_orders_customers, compute_order_totals
-from src.optimization import repartition_by_column, coalesce_partitions,inspect_partition_sizes
+from src.optimization import repartition_by_column, coalesce_partitions,inspect_partition_sizes,apply_caching
 
 def run_pipeline() -> None:
     spark = get_spark_session()
@@ -20,7 +20,7 @@ def run_pipeline() -> None:
     print(f"Partitions after coalesce:    {result_df.rdd.getNumPartitions()}")
 
     print(f"Row counts per partition:      {inspect_partition_sizes(result_df)}")
-
+    result_df = apply_caching(result_df)
     result_df.show()
 
     return spark  # hand the session back so the entry point can decide when to stop it
