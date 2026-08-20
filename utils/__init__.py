@@ -1,6 +1,6 @@
 """Reusable utilities for the Retail Analytics application."""
 
-from retail_analytics.utils.exceptions import (
+from utils.exceptions import (
     RetailAnalyticsError,
     ConfigurationError,
     DataError,
@@ -8,7 +8,8 @@ from retail_analytics.utils.exceptions import (
     IngestionError,
     ValidationError,
 )
-from retail_analytics.utils.logger import get_logger
+
+from utils.applogger import get_logger
 
 __all__ = [
     "RetailAnalyticsError",
